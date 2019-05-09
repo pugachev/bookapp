@@ -24,6 +24,7 @@ class Controller extends BaseController
 	    $this->middleware('auth');
     }
 
+    //初期画面一覧取得処理
     public function index()
     {
 	    $books = Book::all();
@@ -53,6 +54,7 @@ class Controller extends BaseController
   		return redirect('/');
     }
 
+    //投稿削除処理
     public function deleteTitle(Book $book)
     {
 	    $book->delete();
@@ -60,6 +62,7 @@ class Controller extends BaseController
       return redirect('/');
     }
 
+    //投稿・コメント削除処理
     public function remove(Request $request,Book $book)
     {
       // $comment=Comment::findOrFail($book);
@@ -73,12 +76,14 @@ class Controller extends BaseController
       return redirect('/');
     }
 
+    //投稿に対応する詳細記事一覧を取得する処理
     public function detail(Book $book)
     {
       $book = Book::findOrFail($book->id);
       return view('detail')->with('book', $book);
     }
 
+    //投稿に対する詳細記事を投稿する処理
     public function store(Request $request,Book $book)
     {
 
