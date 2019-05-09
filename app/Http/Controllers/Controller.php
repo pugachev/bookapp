@@ -30,6 +30,7 @@ class Controller extends BaseController
 		  return view('books',['books'=>$books]);
     }
 
+    //新規投稿処理
     public function createTitle(Request $request)
     {
 	    $validator = Validator::make($request->all(),[
