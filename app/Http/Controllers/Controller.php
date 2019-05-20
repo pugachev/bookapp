@@ -28,6 +28,14 @@ class Controller extends BaseController
     public function index()
     {
 	    $books = Book::all();
+      // $books = DB::select('select * from books');
+      // print_r($books->toArray());
+      $tmp = $books->toArray();
+      for($i=0;$i<count($tmp);$i++)
+      {
+        print_r($tmp[$i]['title']);
+      }
+      // dd(count($books));
 		  return view('books',['books'=>$books]);
     }
 
@@ -92,6 +100,20 @@ class Controller extends BaseController
       return redirect()->action('Controller@detail', $book);
     }
 
+    //コメント投稿削除処理
+    public function commentDelete(Comment $comment)
+    {
+
+      // dd($comment->id);
+      // $comment = $book->comments();
+      $tmpcomment = Comment::findOrFail($comment->id);
+      $tmpcomment->delete();
+      $book = Book::findOrFail($comment->book_id);
+      return view('detail')->with('book', $book);
+
+      // return redirect('/');
+      // return redirect()->action('Controller@index', $book);
+    }
     // public function destroy(Post $post, Comment $comment)
     // {
     //   $comment->delete();

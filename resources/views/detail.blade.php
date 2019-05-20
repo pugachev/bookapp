@@ -48,34 +48,35 @@
 					</div>
 				</form>
 			</div>
+		</div>
 		<!-- </div> -->
 
 		<!-- books -->
-		@if (count($book->comments) > 0)
-		<div class="col-sm-offset-2 col-sm-8">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					{{ $book->title }}
-				</div>
-				<div class="panel-body">
-					<div class="table-responsive">
-						<table class="table table-striped task-table">
-							<thead>
-								<th>books</th>
-								<th>&nbsp;</th>
-							</thead>
-							<tbody>
-								@foreach ($book->comments as $comment)
-									<tr>
-										<td class="table-text">&nbsp;</td>
-										<td>
-											&nbsp;
-										</td>
-										<td class="table-text"><div>{{$comment->comment}}</div></td>
-									</tr>
-								@endforeach
-							</tbody>
-						</table>
+		<div class="container">
+			@if (count($book->comments) > 0)
+			<div class="col-sm-offset-2 col-sm-8">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						{{ $book->title }}
+					</div>
+					<div class="panel-body">
+						<div class="table-responsive">
+							<table class="table table-striped task-table">
+
+								<tbody>
+									@foreach ($book->comments as $comment)
+										<tr>
+											<td class="table-text" colspan="5">
+												<div>{{$comment->comment}}</div>
+											</td>
+											<td colspan="3">
+												<a class="btn btn-primary" href="{{action('Controller@commentDelete',$comment)}}" role="button">削除</a>
+											</td>
+										</tr>
+									@endforeach
+								</tbody>
+							</table>
+						</div>
 					</div>
 				</div>
 			</div>
